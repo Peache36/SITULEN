@@ -4,7 +4,7 @@
     <!-- Page Heading -->
     <h1 class="h3 mb-4 text-gray-800"><?= $title; ?></h1>
 
-
+    <!-- TAMPILAN TABEL SUB MENU -->
     <div class="row">
         <div class="col-lg">
             <?php if (validation_errors()) : ?>
@@ -13,6 +13,7 @@
                 </div>
             <?php endif; ?>
             <?= form_error('menu', '<div class="alert alert-danger" role="alert">', '</div>'); ?>
+
             <a href="" class=" btn btn-primary mb-3" data-toggle="modal" data-target="#newSubMenu">Add New Sub Menu</a>
 
             <?= $this->session->flashdata('message'); ?>
@@ -60,6 +61,7 @@
 <!-- End of Main Content -->
 
 <!-- Modal -->
+<!-- TAMBAH SUB MENU -->
 <div class="modal fade" id="newSubMenu" tabindex="-1" role="dialog" aria-labelledby="newSubMenuLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
