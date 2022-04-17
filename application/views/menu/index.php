@@ -13,7 +13,7 @@
             <?= $this->session->flashdata('message'); ?>
             <table class="table table-hover">
                 <thead>
-                    <tr>
+                    <tr class=" text-center">
                         <th scope="col">#</th>
                         <th scope="col">Menu</th>
                         <th scope="col">Action</th>
@@ -22,12 +22,19 @@
                 <tbody>
                     <?php $i = 1; ?>
                     <?php foreach ($menu as $m) : ?>
-                        <tr>
+                        <tr class=" text-center">
                             <th scope="row"><?= $i; ?></th>
                             <td><?= $m['menu']; ?></td>
                             <td>
-                                <a href="" class="badge badge-success">edit</a>
-                                <a href="" class="badge badge-danger">delete</a>
+                                <form action="menu/editmenu/<?= $m['id'] ?>" method="POST" class="d-inline">
+                                    <input type="hidden" name="_method" value="EDIT">
+                                    <button type="button" class="badge badge-success" data-toggle="modal" data-target="#editMenuModal<?= $m['id'] ?>">edit</button>
+                                </form>
+
+                                <form action="menu/hapusmenu/<?= $m['id'] ?>" method="POST" class="d-inline">
+                                    <input type="hidden" name="_method" value="DELETE">
+                                    <button type="submit" class="badge badge-danger">delete</button>
+                                </form>
                             </td>
                         </tr>
                         <?php $i++; ?>
@@ -70,3 +77,31 @@
         </div>
     </div>
 </div>
+
+<!-- MODAL EDIT MENU  -->
+<?php foreach ($menu as $m) : ?>
+    <div class="modal fade" id="editMenuModal<?= $m['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="editMenuModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editMenuModalLabel">Edit Menu</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="menu/editmenu/<?= $m['id'] ?>" method="POST">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <labe for='menu'>Nama Menu</labe>
+                            <input type="text" class="form-control" id="menu" name="menu" value="<?= $m['menu'] ?>">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="Submit" class="btn btn-primary">Simpan</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+<?php endforeach; ?>

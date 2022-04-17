@@ -27,8 +27,10 @@
                             <td><?= $r['role']; ?></td>
                             <td>
                                 <a href="<?= base_url('admin/roleaccess/') . $r['id']; ?>" class="badge badge-warning">access</a>
-                                <a href="" class="badge badge-success">edit</a>
-                                <a href="" class="badge badge-danger">delete</a>
+                                <form action="hapusrole/<?= $r['id'] ?>" method="POST" class="d-inline">
+                                    <input type="hidden" name="_method" value="DELETE">
+                                    <button type="submit" class="badge badge-danger" onclick="return confirm('apakah yakin ?');">delete</button>
+                                </form>
                             </td>
                         </tr>
                         <?php $i++; ?>
@@ -57,7 +59,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="<?= base_url('admin/role'); ?>" method="POST">
+            <form action="<?= base_url('admin/addrole'); ?>" method="POST">
                 <div class="modal-body">
                     <div class="form-group">
                         <input type="text" class="form-control" id="role" name="role" placeholder="Role name">

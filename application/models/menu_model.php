@@ -12,4 +12,28 @@ class Menu_model extends CI_Model
 
         return $this->db->query($query)->result_array();
     }
+
+    public function getUserList()
+    {
+        $query = "SELECT user.image , user.name, user_role.role
+        FROM user JOIN user_role
+        ON user.role_id = user_role.id";
+
+        return $this->db->query($query)->result_array();
+    }
+
+    public function getStatusSurat()
+    {
+        $query = "SELECT surat.* , status_surat.status
+        FROM surat JOIN status_surat
+        ON surat.status_id = status_surat.id";
+
+        return $this->db->query($query)->result_array();
+    }
+
+    public function getOptionSurat()
+    {
+        $query = "SELECT * FROM jenis_surat";
+        return $this->db->query($query)->result_array();
+    }
 }
