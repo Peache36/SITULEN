@@ -15,7 +15,7 @@ class Menu_model extends CI_Model
 
     public function getUserList()
     {
-        $query = "SELECT user.image , user.name, user_role.role
+        $query = "SELECT user.image , user.name, user_role.role, user.id
         FROM user JOIN user_role
         ON user.role_id = user_role.id";
 
@@ -34,6 +34,20 @@ class Menu_model extends CI_Model
     public function getOptionSurat()
     {
         $query = "SELECT * FROM jenis_surat";
+        return $this->db->query($query)->result_array();
+    }
+
+    public function getOptionStatus()
+    {
+        $query = "SELECT * FROM status_surat";
+        return $this->db->query($query)->result_array();
+    }
+
+    public function downloadSurat($id)
+    {
+        $query = "SELECT surat.dokumen
+        FROM surat WHERE surat.id = $id";
+
         return $this->db->query($query)->result_array();
     }
 }

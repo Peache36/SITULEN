@@ -14,7 +14,6 @@ class User extends CI_Controller
         $data['title'] = "My Profile";
         $data['user'] = $this->db->get_where('user', ['name' => $this->session->userdata('name')])->row_array();
 
-
         $this->load->view('template/header', $data);
         $this->load->view('template/sidebar', $data);
         $this->load->view('template/topbar', $data);
@@ -37,11 +36,13 @@ class User extends CI_Controller
             $this->load->view('user/edit', $data);
             $this->load->view('template/footer');
         } else {
+            $email = $this->input->post('email');
             $name = $this->input->post('name');
-            $name = $this->input->post('name');
+
 
             // Jika ada gambar di upload
             $upload_image = $_FILES['image']['name'];
+
 
             if ($upload_image) {
                 $config['upload_path'] = './assets/img/profile';
@@ -60,16 +61,20 @@ class User extends CI_Controller
                     $new_image = $this->upload->data('file_name');
                     $this->db->set('image', $new_image);
                 } else {
-                    echo $this->upload->display_errors();
+                    $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">' . $this->upload->display_errors() . '</div>');
+                    redirect('user');
                 }
             }
 
             $this->db->set('name', $name);
-            $this->db->where('name', $name);
+            $this->db->where('email', $email);
             $this->db->update('user');
+
+            $_SESSION['name'] = $name;
 
             $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
             Your Profile has been Updated ! </div>');
+
             redirect('user');
         }
     }

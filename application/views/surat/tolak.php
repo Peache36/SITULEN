@@ -7,10 +7,7 @@
     <!-- TAMPILIN TABEL SURAT -->
     <div class="row">
         <div class="col">
-            <a href="" class=" btn btn-primary mb-3" data-toggle="modal" data-target="#newSuratModal">Add New Surat</a>
-            <?= form_error('name', '<div class="alert alert-danger" role="alert">', '</div>'); ?>
-            <?= form_error('perihal', '<div class="alert alert-danger" role="alert">', '</div>'); ?>
-            <?= form_error('jenis', '<div class="alert alert-danger" role="alert">', '</div>'); ?>
+
             <?= $this->session->flashdata('message'); ?>
 
             <table class="table table-hover text-center">
@@ -21,13 +18,14 @@
                         <th scope="col">Jenis Surat</th>
                         <th scope="col">Status</th>
                         <th scope="col" width="300">Perihal</th>
+                        <th scope="col">Dokumen</th>
+                        <th scope="col" width="300">Keterangan</th>
                         <th scope="col">Date Create</th>
                         <th scope="col">Action</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php $i = 1; ?>
-
                     <!-- TAMPILAN DI PROSES BAGIAN MEMBER -->
 
                     <?php foreach ($status as $s) :
@@ -35,7 +33,7 @@
                         if ($user['role_id'] != 2) {
                             continue;
                         } else {
-                            if ($s['status_id'] != 1 or $s['user_id'] != $user['id']) {
+                            if ($s['status_id'] != 3 or $s['user_id'] != $user['id']) {
                                 continue;
                             }
                         }
@@ -49,8 +47,10 @@
                                 } ?>
                                 <td><?= $o['jenis']; ?></td>
                             <?php endforeach; ?>
-                            <td><a class=" badge badge-warning"><?= $s['status']; ?> </a></td>
+                            <td><a class=" badge badge-danger"><?= $s['status']; ?> </a></td>
                             <td><?= $s['perihal']; ?></td>
+                            <td><?= $s['dokumen']; ?></td>
+                            <td><?= $s['keterangan']; ?></td>
                             <td> <?= date('d F Y', $s['date_created']) ?></td>
                             <td>
                                 <form action="surat/editsurat/<?= $s['id'] ?>" method="POST" class="d-inline">
@@ -72,7 +72,7 @@
                         if ($user['role_id'] != 1) {
                             continue;
                         } else {
-                            if ($s['status_id'] != '1') {
+                            if ($s['status_id'] != '3') {
                                 continue;
                             }
                         }
@@ -86,8 +86,10 @@
                                 } ?>
                                 <td><?= $o['jenis']; ?></td>
                             <?php endforeach; ?>
-                            <td><a class=" badge badge-warning"><?= $s['status']; ?> </a></td>
+                            <td><a class=" badge badge-danger"><?= $s['status']; ?> </a></td>
                             <td><?= $s['perihal']; ?></td>
+                            <td><?= $s['dokumen']; ?></td>
+                            <td><?= $s['keterangan']; ?></td>
                             <td> <?= date('d F Y', $s['date_created']) ?></td>
                             <td>
                                 <form action="surat/editsurat/<?= $s['id'] ?>" method="POST" class="d-inline">
@@ -104,51 +106,11 @@
             </table>
         </div>
     </div>
-
 </div>
 <!-- /.container-fluid -->
 
 </div>
 <!-- End of Main Content -->
-
-<!-- MODAL TAMBAH SURAT -->
-<div class="modal fade" id="newSuratModal" tabindex="-1" role="dialog" aria-labelledby="newSuratModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="newSuratModalLabel">Add New Surat</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <form action="surat" method="POST">
-                <div class="modal-body">
-                    <div class="form-group">
-                        <label for="nama" class=" font-weight-bolder">Nama Lengkap</label>
-                        <input type="text" class="form-control" id="nama" name="nama" placeholder="Full Name">
-                    </div>
-                    <div class="form-group">
-                        <label for="jenis" class=" font-weight-bolder">Jenis Surat</label>
-                        <select name="jenis" id="jenis" class="form-control">
-                            <option value="">Select Menu</option>
-                            <?php foreach ($option as $o) :  ?>
-                                <option value="<?= $o['id']; ?>"> <?= $o['jenis']; ?></option>
-                            <?php endforeach; ?>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="perihal" class=" font-weight-bolder">Perihal</label>
-                        <input type="text" class="form-control" id="perihal" name="perihal" placeholder="Perihal">
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="Submit" class="btn btn-primary">Simpan</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
 
 <!-- MODAL EDIT SURAT ADMIN -->
 <?php foreach ($surat as $s) : ?>
@@ -161,7 +123,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form method="post" action="surat/editsurat/<?= $s['id'] ?>" enctype="multipart/form-data">
+                <form method="post" action="editsurat/<?= $s['id'] ?>" enctype="multipart/form-data">
                     <div class="modal-body">
                         <div class="form-group">
                             <label for='nama_lengkap'>Nama Lengkap</label>
@@ -221,7 +183,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form action="surat/editsurat/<?= $s['id'] ?>" method="POST">
+                <form action="editsurat/<?= $s['id'] ?>" method="POST">
                     <div class="modal-body">
                         <div class="form-group">
                             <label class=" font-weight-bolder" for='nama_lengkap'>Nama Lengkap</label>
@@ -235,6 +197,11 @@
                                     <option value="<?= $o['id']; ?>"> <?= $o['jenis']; ?></option>
                                 <?php endforeach; ?>
                             </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="status" class=" font-weight-bolder">Status Surat</label>
+                            <input type="text" class="form-control" id="status" name="status" value="2" hidden>
+                            <input type="text" class="form-control" value="<?= $optionstatus[1]['status'] ?>" readonly>
                         </div>
                         <div class="form-group">
                             <label class=" font-weight-bolder" for='perihal'>Perihal</label>
@@ -251,7 +218,8 @@
     </div>
 <?php endforeach; ?>
 
-<!-- MODAL DELETE -->
+<!-- MODAL HAPUS SURAT -->
+
 <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -264,7 +232,7 @@
             <div class="modal-body">Select "Delete" below if you are ready to delete your current surat</div>
             <div class="modal-footer">
                 <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                <a class="btn btn-danger" href="surat/hapussurat/<?= $s['id'] ?>">Delete</a>
+                <a class="btn btn-danger" href="hapussurat/<?= $s['id'] ?>">Delete</a>
             </div>
         </div>
     </div>

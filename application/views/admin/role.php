@@ -27,10 +27,7 @@
                             <td><?= $r['role']; ?></td>
                             <td>
                                 <a href="<?= base_url('admin/roleaccess/') . $r['id']; ?>" class="badge badge-warning">access</a>
-                                <form action="hapusrole/<?= $r['id'] ?>" method="POST" class="d-inline">
-                                    <input type="hidden" name="_method" value="DELETE">
-                                    <button type="submit" class="badge badge-danger" onclick="return confirm('apakah yakin ?');">delete</button>
-                                </form>
+                                <button href="" class="badge badge-danger" data-toggle="modal" data-target="#deleteModal">delete</button>
                             </td>
                         </tr>
                         <?php $i++; ?>
@@ -70,6 +67,25 @@
                     <button type="Submit" class="btn btn-primary">Add</button>
                 </div>
             </form>
+        </div>
+    </div>
+</div>
+
+<!-- MODAL DELETE -->
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteModalLabel">Are you sure to delete ?</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">Select "Delete" below if you are ready to delete your current surat</div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                <a class="btn btn-danger" href="hapusrole/<?= $r['id'] ?>">Delete</a>
+            </div>
         </div>
     </div>
 </div>

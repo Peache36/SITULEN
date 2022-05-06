@@ -14,6 +14,8 @@ class Admin extends CI_Controller
         $data['title'] = "My Dashboard";
         $data['user'] = $this->db->get_where('user', ['name' => $this->session->userdata('name')])->row_array();
 
+        $data['surat'] = $this->db->get('surat')->result_array();
+
         $this->load->view('template/header', $data);
         $this->load->view('template/sidebar', $data);
         $this->load->view('template/topbar', $data);
@@ -144,7 +146,7 @@ class Admin extends CI_Controller
         $data['menu'] = $this->menu->getUserList();
 
 
-        $this->form_validation->set_rules('name', 'Name', 'required|is_unique[user.name]');
+        $this->form_validation->set_rules('name', 'Username', 'required|is_unique[user.name]');
         $this->form_validation->set_rules('email', 'Email', 'required');
         $this->form_validation->set_rules('password', 'Pasword', 'required');
         $this->form_validation->set_rules('role_id', 'Role Id', 'required');
@@ -186,5 +188,27 @@ class Admin extends CI_Controller
                 New User Added</div>');
             redirect('admin/userlist');
         }
+    }
+
+    // HAPUS ROLE
+    public function hapusUser($id)
+    {
+        $this->db->where('id', $id);
+        $this->db->delete('user');
+        $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">
+            User has been deleted</div>');
+        redirect('admin/userlist');
+    }
+
+    // HAPUS ROLE
+    public function resetPassword($id)
+    {
+        $pass = password_hash('default123', PASSWORD_DEFAULT);
+        $this->db->set('password', $pass);
+        $this->db->where('id', $id);
+        $this->db->update('user');
+        $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">
+            Password has been reset</div>');
+        redirect('admin/userlist');
     }
 }
