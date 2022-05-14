@@ -43,10 +43,24 @@ class Menu_model extends CI_Model
         return $this->db->query($query)->result_array();
     }
 
+    public function getRoles()
+    {
+        $query = "SELECT * FROM user_role";
+        return $this->db->query($query)->result_array();
+    }
+
     public function downloadSurat($id)
     {
         $query = "SELECT surat.dokumen
         FROM surat WHERE surat.id = $id";
+
+        return $this->db->query($query)->result_array();
+    }
+
+    public function statistik()
+    {
+        $query = "SELECT surat.date_created 
+        FROM surat ";
 
         return $this->db->query($query)->result_array();
     }

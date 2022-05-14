@@ -66,7 +66,7 @@ class Menu extends CI_Controller
 
             $this->db->insert('user_sub_menu', $data);
             $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
-            New Menu Added</div>');
+            New Sub Menu Added</div>');
             redirect('menu/submenu');
         }
     }
@@ -85,7 +85,7 @@ class Menu extends CI_Controller
         $this->db->where('id', $id);
         $this->db->delete('user_sub_menu');
         $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">
-            Menu has been deleted</div>');
+            Sub Menu has been deleted</div>');
         redirect('menu/submenu');
     }
 
@@ -145,7 +145,7 @@ class Menu extends CI_Controller
             $this->db->where('id', $id);
             $this->db->update('user_sub_menu', $data);
             $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
-            New Sub Menu Changes </div>');
+            Sub Menu Update </div>');
             redirect('menu/submenu');
         }
     }

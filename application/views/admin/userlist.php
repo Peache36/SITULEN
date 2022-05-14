@@ -26,8 +26,12 @@
                             <td><?= $m['name']; ?></td>
                             <td><?= $m['role']; ?></td>
                             <td>
-                                <button href="" class="badge badge-info" data-toggle="modal" data-target="#resetModal">reset password</button>
-                                <button href="" class="badge badge-danger" data-toggle="modal" data-target="#deleteModal">delete</button>
+                                <button class="badge badge-info" data-toggle="modal" data-target="#resetModal<?= $m['id'] ?>">reset password</button>
+                                <form action="edituser/<?= $m['id'] ?>" method="POST" class="d-inline">
+                                    <input type="hidden" name="_method" value="EDIT">
+                                    <button type="button" class="badge badge-success" data-toggle="modal" data-target="#editUserModal<?= $m['id'] ?>">edit</button>
+                                </form>
+                                <button class="badge badge-danger" data-toggle="modal" data-target="#deleteModal<?= $m['id'] ?>">delete</button>
                             </td>
                         </tr>
                         <?php $i++; ?>
@@ -75,14 +79,13 @@
                         <label for=role_id>Pilih role :</label>
                         <select name="role_id" id="role_id" class="form-control">
                             <option value="">Select Role</option>
-                            <option value="Administrator">Administrator</option>
-                            <option value="Member">Member</option>
-
+                            <?php foreach ($roles as $rl) :  ?>
+                                <option value="<?= $rl['id']; ?>"> <?= $rl['role']; ?></option>
+                            <?php endforeach; ?>
                         </select>
                     </div>
 
                 </div>
-
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     <button type="Submit" class="btn btn-primary">Add</button>
@@ -92,40 +95,81 @@
     </div>
 </div>
 
-<!-- MODAL DELETE -->
-<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="deleteModalLabel">Are you sure to delete ?</h5>
-                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">×</span>
-                </button>
-            </div>
-            <div class="modal-body">Select "Delete" below if you are ready to delete your current surat</div>
-            <div class="modal-footer">
-                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                <a class="btn btn-danger" href="hapususer/<?= $m['id'] ?>">Delete</a>
+<!-- MODAL EDIT USER -->
+<?php foreach ($menu as $m) : ?>
+    <div class="modal fade" id="editUserModal<?= $m['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="editUserModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editUserModalLabel">Edit User</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="edituser/<?= $m['id'] ?>" method="POST">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for='username'>Username</label>
+                            <input type="text" class="form-control" id="username" name="username" value="<?= $m['name'] ?>" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="roles" class=" font-weight-bolder">Role</label>
+                            <select name="roles" id="roles" class="form-control">
+                                <option value="">Select Role</option>
+                                <?php foreach ($roles as $rl) :  ?>
+                                    <option value="<?= $rl['id']; ?>"> <?= $rl['role']; ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="Submit" class="btn btn-primary">Simpan</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
-</div>
+<?php endforeach; ?>
+
+<!-- MODAL DELETE -->
+<?php foreach ($menu as $m) : ?>
+    <div class="modal fade" id="deleteModal<?= $m['id'] ?>" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteModalLabel">Are you sure to delete ?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">Select "Delete" below if you are ready to delete your current surat</div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <a class="btn btn-danger" href="surat/hapussurat/<?= $m['id'] ?>">Delete</a>
+                </div>
+            </div>
+        </div>
+    </div>
+<?php endforeach; ?>
 
 <!-- MODAL RESET -->
-<div class="modal fade" id="resetModal" tabindex="-1" role="dialog" aria-labelledby="resetModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="resetModalLabel">Are you sure to delete ?</h5>
-                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">×</span>
-                </button>
-            </div>
-            <div class="modal-body">Select "Reset" below if you are ready to reset password your current password</div>
-            <div class="modal-footer">
-                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                <a class="btn btn-danger" href="resetpassword/<?= $m['id'] ?>">Reset</a>
+<?php foreach ($menu as $m) : ?>
+    <div class="modal fade" id="resetModal<?= $m['id'] ?>" tabindex="-1" role="dialog" aria-labelledby="resetModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="resetModalLabel">Are you sure to delete ?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">Select "Reset" below if you are ready to reset password your current password</div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <a class="btn btn-danger" href="resetpassword/<?= $m['id'] ?>">Reset</a>
+                </div>
             </div>
         </div>
     </div>
-</div>
+<?php endforeach; ?>

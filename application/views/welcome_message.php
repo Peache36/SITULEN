@@ -1,100 +1,223 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
-?><!DOCTYPE html>
+defined('BASEPATH') or exit('No direct script access allowed');
+?>
+<!DOCTYPE html>
 <html lang="en">
+
 <head>
-	<meta charset="utf-8">
-	<title>Welcome to CodeIgniter</title>
 
-	<style type="text/css">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+	<link rel=" shortcut icon" href="assets/img/favicon.png">
 
-	::selection { background-color: #E13300; color: white; }
-	::-moz-selection { background-color: #E13300; color: white; }
+	<title>SITULEN</title>
 
-	body {
-		background-color: #fff;
-		margin: 40px;
-		font: 13px/20px normal Helvetica, Arial, sans-serif;
-		color: #4F5155;
-	}
+	<!-- Bootstrap core CSS -->
+	<link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
-	a {
-		color: #003399;
-		background-color: transparent;
-		font-weight: normal;
-		text-decoration: none;
-	}
+	<!--
 
-	a:hover {
-		color: #97310e;
-	}
+TemplateMo 570 Chain App Dev
 
-	h1 {
-		color: #444;
-		background-color: transparent;
-		border-bottom: 1px solid #D0D0D0;
-		font-size: 19px;
-		font-weight: normal;
-		margin: 0 0 14px 0;
-		padding: 14px 15px 10px 15px;
-	}
+https://templatemo.com/tm-570-chain-app-dev
 
-	code {
-		font-family: Consolas, Monaco, Courier New, Courier, monospace;
-		font-size: 12px;
-		background-color: #f9f9f9;
-		border: 1px solid #D0D0D0;
-		color: #002166;
-		display: block;
-		margin: 14px 0 14px 0;
-		padding: 12px 10px 12px 10px;
-	}
+-->
 
-	#body {
-		margin: 0 15px 0 15px;
-		min-height: 96px;
-	}
+	<!-- Additional CSS Files -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+	<link rel="stylesheet" href="assets/css/templatemo-chain-app-dev.css">
+	<link rel="stylesheet" href="assets/css/animated.css">
+	<link rel="stylesheet" href="assets/css/owl.css">
 
-	p {
-		margin: 0 0 10px;
-		padding:0;
-	}
-
-	p.footer {
-		text-align: right;
-		font-size: 11px;
-		border-top: 1px solid #D0D0D0;
-		line-height: 32px;
-		padding: 0 10px 0 10px;
-		margin: 20px 0 0 0;
-	}
-
-	#container {
-		margin: 10px;
-		border: 1px solid #D0D0D0;
-		box-shadow: 0 0 8px #D0D0D0;
-	}
-	</style>
 </head>
+
 <body>
 
-<div id="container">
-	<h1>Welcome to CodeIgniter!</h1>
+	<!-- ***** Preloader Start ***** -->
+	<div id="js-preloader" class="js-preloader">
+		<div class="preloader-inner">
+			<span class="dot"></span>
+			<div class="dots">
+				<span></span>
+				<span></span>
+				<span></span>
+			</div>
+		</div>
+	</div>
+	<!-- ***** Preloader End ***** -->
 
-	<div id="body">
-		<p>The page you are looking at is being generated dynamically by CodeIgniter.</p>
+	<!-- ***** Header Area Start ***** -->
+	<header class="header-area header-sticky wow slideInDown" data-wow-duration="0.75s" data-wow-delay="0s">
+		<div class="container">
+			<div class="row">
+				<div class="col-12">
+					<nav class="main-nav">
+						<!-- ***** Logo End ***** -->
+						<!-- ***** Menu Start ***** -->
+						<ul class="nav">
+							<li class="scroll-to-section"><a href="#top" class="active">Home</a></li>
+							<li class="scroll-to-section"><a href="#services">Services</a></li>
+							<li class="scroll-to-section"><a href="#about">About</a></li>
+							<li>
+								<div class="gradient-button"><a id="login" href="<?= base_url('auth') ?>"><i class="fa fa-sign-in-alt"></i> Sign In </a></div>
+							</li>
+						</ul>
+						<a class='menu-trigger'>
+							<span>Menu</span>
+						</a>
+						<!-- ***** Menu End ***** -->
+					</nav>
+				</div>
+			</div>
+		</div>
+	</header>
+	<!-- ***** Header Area End ***** -->
 
-		<p>If you would like to edit this page you'll find it located at:</p>
-		<code>application/views/welcome_message.php</code>
 
-		<p>The corresponding controller for this page is found at:</p>
-		<code>application/controllers/Welcome.php</code>
 
-		<p>If you are exploring CodeIgniter for the very first time, you should start by reading the <a href="userguide3/">User Guide</a>.</p>
+	<div class="main-banner wow fadeIn" id="top" data-wow-duration="1s" data-wow-delay="0.5s">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="row">
+						<div class="col-lg-6 align-self-center">
+							<div class="left-content show-up header-text wow fadeInLeft" data-wow-duration="1s" data-wow-delay="1s">
+								<div class="row">
+									<div class="col-lg-12">
+										<h2>SITULEN</h2>
+										<p>Website ini merupakan Sistem Informasi Tata Usaha Online guna membantu pengurusan tata usaha</p>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-lg-6">
+							<div class="right-image wow fadeInRight" data-wow-duration="1s" data-wow-delay="0.5s">
+								<img style="border-radius: 50%;" src="assets/images/favicon.png" alt="situlen-logo">
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 
-	<p class="footer">Page rendered in <strong>{elapsed_time}</strong> seconds. <?php echo  (ENVIRONMENT === 'development') ?  'CodeIgniter Version <strong>' . CI_VERSION . '</strong>' : '' ?></p>
-</div>
+	<div id="services" class="services section">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-8 offset-lg-2">
+					<div class="section-heading  wow fadeInDown" data-wow-duration="1s" data-wow-delay="0.5s">
+						<h4><em>Fungsi Yang Tersedia</em></h4>
+						<img src="assets/images/heading-line-dec.png" alt="">
+						<p>Situlen menyediakan fungsi yang dapat digunakan meliputi</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-4">
+					<div class="service-item first-service">
+						<div class="icon"></div>
+						<h4>Dashboard Admin</h4>
+						<p>Admin dapat melihat jumlah surat yang diproses, diterima dan ditolak serta melihat statistik surat</p>
+					</div>
+				</div>
+				<div class="col-lg-4">
+					<div class="service-item second-service">
+						<div class="icon"></div>
+						<h4>Request Surat</h4>
+						<p>Pengguna dapat melakukan request surat berupa surat Izin , surat Dispen dan surat Sakit</p>
+					</div>
+				</div>
+				<div class="col-lg-4">
+					<div class="service-item third-service">
+						<div class="icon text-light"></div>
+						<h4>Download File</h4>
+						<p>Pengguna dapat mendownload file surat yang diterima dari admin</p>
 
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+	<div id="about" class="about-us section">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-8 offset-lg-2">
+					<div class="section-heading  wow fadeInDown" data-wow-duration="1s" data-wow-delay="0.5s">
+						<h4><em>How to Use</em></h4>
+						<img src="assets/images/heading-line-dec.png" alt="">
+						<p>Cara menggunakan situlen sebagai berikut</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-4">
+					<div class="service-item first-service">
+						<p>1. Admin membuat akun untuk para siswa</p>
+					</div>
+				</div>
+				<div class="col-lg-4">
+					<div class="service-item second-service">
+						<p>2. Siswa menerima username dan password</p>
+					</div>
+				</div>
+				<div class="col-lg-4 ">
+					<div class="service-item third-service">
+						<p>3. Siswa login dan mengajukan surat</p>
+					</div>
+				</div>
+				<div class="col-lg-4 mt-5 ">
+					<div class="service-item fourth-service">
+						<p>4. Admin memproses surat yang diajukan siswa</p>
+					</div>
+				</div>
+				<div class="col-lg-4 mt-5">
+					<div class="service-item fifth-service">
+						<p>5. Jika surat diterima, siswa mendownload file surat yang diberikan admin</p>
+					</div>
+				</div>
+				<div class="col-lg-4 mt-5">
+					<div class="service-item sixth-service">
+						<p>6. Jika surat ditolak, siswa merevisi surat yang diajukan </p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<footer id="newsletter">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="copyright-text">
+						<p>Copyright © 2022 SITULEN
+							<br>Design: <a href="https://templatemo.com/" target="_blank" title="css templates">TemplateMo</a>
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</footer>
+
+
+	<!-- Scripts -->
+	<script src="assets/vendor/jquery/jquery.min.js"></script>
+	<script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+	<script src="assets/js/owl-carousel.js"></script>
+	<script src="assets/js/animation.js"></script>
+	<script src="assets/js/imagesloaded.js"></script>
+	<script src="assets/js/popup.js"></script>
+	<script src="assets/js/custom.js"></script>
 </body>
+
 </html>

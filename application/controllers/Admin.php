@@ -86,7 +86,7 @@ class Admin extends CI_Controller
         $this->db->where('id', $id);
         $this->db->delete('user_role');
         $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">
-            Menu has been deleted</div>');
+            Role has been deleted</div>');
         redirect('admin/role');
     }
 
@@ -115,7 +115,7 @@ class Admin extends CI_Controller
 
             $this->db->insert('user_role', $data);
             $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
-            New Menu Added</div>');
+            New Role Added</div>');
             redirect('admin/role');
         }
     }
@@ -128,6 +128,9 @@ class Admin extends CI_Controller
 
         $this->load->model('Menu_model', 'menu');
         $data['menu'] = $this->menu->getUserList();
+
+        $this->load->model('Menu_model', 'roles');
+        $data['roles'] = $this->roles->getRoles();
 
         $this->load->view('template/header', $data);
         $this->load->view('template/sidebar', $data);
@@ -145,6 +148,9 @@ class Admin extends CI_Controller
         $this->load->model('Menu_model', 'menu');
         $data['menu'] = $this->menu->getUserList();
 
+        $this->load->model('Menu_model', 'roles');
+        $data['roles'] = $this->roles->getRoles();
+
 
         $this->form_validation->set_rules('name', 'Username', 'required|is_unique[user.name]');
         $this->form_validation->set_rules('email', 'Email', 'required');
@@ -158,34 +164,53 @@ class Admin extends CI_Controller
             $this->load->view('admin/userlist', $data);
             $this->load->view('template/footer');
         } else {
-            $role = $this->input->post('role_id');
-            if ($role = 'Administrator') {
-                $data = [
-                    'id' => 'NULL',
-                    'name' => $this->input->post('name'),
-                    'email' => $this->input->post('email'),
-                    'image' => 'default.jpg',
-                    'password' => password_hash($this->input->post('password'), PASSWORD_DEFAULT),
-                    'role_id' => 1,
-                    'is_active' => 1,
-                    'date_created' => time(),
-                ];
-            } else {
-                $data = [
-                    'id' => 'NULL',
-                    'name' => $this->input->post('name'),
-                    'email' => $this->input->post('email'),
-                    'image' => 'default.jpg',
-                    'password' => password_hash($this->input->post('password'), PASSWORD_DEFAULT),
-                    'role_id' => 2,
-                    'is_active' => 1,
-                    'date_created' => time(),
-                ];
-            }
+            $data = [
+                'id' => 'NULL',
+                'name' => $this->input->post('name'),
+                'email' => $this->input->post('email'),
+                'image' => 'default.jpg',
+                'password' => password_hash($this->input->post('password'), PASSWORD_DEFAULT),
+                'role_id' => $this->input->post('role_id'),
+                'is_active' => 1,
+                'date_created' => time(),
+            ];
 
             $this->db->insert('user', $data);
             $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
                 New User Added</div>');
+            redirect('admin/userlist');
+        }
+    }
+
+    // EDIT USER
+    public function editUser($id)
+    {
+        $data['title'] = "User List";
+        $data['user'] = $this->db->get_where('user', ['name' => $this->session->userdata('name')])->row_array();
+
+        $this->load->model('Menu_model', 'menu');
+        $data['menu'] = $this->menu->getUserList();
+
+        $this->load->model('Menu_model', 'roles');
+        $data['roles'] = $this->roles->getRoles();
+
+        $this->form_validation->set_rules('roles', 'role', 'required');
+
+        if ($this->form_validation->run() == false) {
+            $this->load->view('template/header', $data);
+            $this->load->view('template/sidebar', $data);
+            $this->load->view('template/topbar', $data);
+            $this->load->view('admin/userlist', $data);
+            $this->load->view('template/footer');
+        } else {
+            $role_id = $this->input->post('roles');
+
+            $this->db->set('role_id', $role_id);
+            $this->db->where('id', $id);
+            $this->db->update('user');
+
+            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
+            Your Role Updated </div>');
             redirect('admin/userlist');
         }
     }
@@ -200,7 +225,7 @@ class Admin extends CI_Controller
         redirect('admin/userlist');
     }
 
-    // HAPUS ROLE
+    // RESET PASSWORD
     public function resetPassword($id)
     {
         $pass = password_hash('default123', PASSWORD_DEFAULT);

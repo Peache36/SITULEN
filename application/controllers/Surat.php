@@ -129,7 +129,7 @@ class Surat extends CI_Controller
 
 
         $this->form_validation->set_rules('nama_lengkap', 'Nama Lengkap', 'required');
-        $this->form_validation->set_rules('jenis', 'Nama Lengkap', 'required');
+        $this->form_validation->set_rules('jenis', 'Jenis Surat', 'required');
 
         if ($this->form_validation->run() == false) {
             $this->load->view('template/header', $data);
@@ -189,6 +189,6 @@ class Surat extends CI_Controller
         $data['download'] = $this->download->downloadSurat($id);
 
         $file = $data['download'][0]['dokumen'];
-        force_download($file, FALSE);
+        force_download("assets/dokumen/$file", NULL);
     }
 }

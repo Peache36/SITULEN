@@ -2,10 +2,8 @@
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
     <!-- Sidebar - Brand -->
-    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
-        <div class="sidebar-brand-icon rotate-n-15">
-            <i class="fa-solid fa-laptop-code"></i>
-        </div>
+    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="<?= base_url('welcome') ?>">
+        <img style="border-radius: 50%;" src="<?= base_url('assets/images/favicon.png') ?>" alt="situlen-logo" width="50" height="50">
         <div class="sidebar-brand-text mx-3"> SITULEN</div>
     </a>
 

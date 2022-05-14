@@ -58,7 +58,7 @@
                                     <button type="button" class="badge badge-success" data-toggle="modal" data-target="#editSuratModalMember<?= $s['id'] ?>">edit</button>
                                 </form>
 
-                                <button href="" class="badge badge-danger" data-toggle="modal" data-target="#deleteModal">delete</button>
+                                <button class="badge badge-danger" data-toggle="modal" data-target="#deleteModal<?= $s['id'] ?>">delete</button>
 
                             </td>
                         </tr>
@@ -97,7 +97,7 @@
                                     <button type="button" class="badge badge-success" data-toggle="modal" data-target="#editSuratModalAdmin<?= $s['id'] ?>">edit</button>
                                 </form>
 
-                                <button href="" class="badge badge-danger" data-toggle="modal" data-target="#deleteModal">delete</button>
+                                <button class="badge badge-danger" data-toggle="modal" data-target="#deleteModal<?= $s['id'] ?>">delete</button>
                             </td>
                         </tr>
                         <?php $i++; ?>
@@ -218,22 +218,23 @@
     </div>
 <?php endforeach; ?>
 
-<!-- MODAL HAPUS SURAT -->
-
-<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="deleteModalLabel">Are you sure to delete ?</h5>
-                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">×</span>
-                </button>
-            </div>
-            <div class="modal-body">Select "Delete" below if you are ready to delete your current surat</div>
-            <div class="modal-footer">
-                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                <a class="btn btn-danger" href="hapussurat/<?= $s['id'] ?>">Delete</a>
+<!-- MODAL DELETE -->
+<?php foreach ($surat as $s) : ?>
+    <div class="modal fade" id="deleteModal<?= $s['id'] ?>" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteModalLabel">Are you sure to delete ?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">Select "Delete" below if you are ready to delete your current surat</div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <a class="btn btn-danger" href="hapussurat/<?= $s['id'] ?>">Delete</a>
+                </div>
             </div>
         </div>
     </div>
-</div>
+<?php endforeach; ?>
